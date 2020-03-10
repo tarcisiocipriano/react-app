@@ -1,11 +1,11 @@
-.Person {
+/* .Person {
   width: 60%;
   margin: 16px auto;
   padding: 16px;
   border: 1px solid white;
 }
 
-/* @media (min-width: 500px) {
+@media (min-width: 500px) {
   .Person {
     width: 450px;
   }

@@ -1,7 +1,21 @@
 import React, { Component } from 'react';
 import './App.css';
-import Radium, { StyleRoot } from 'radium';
 import Person from './Person/Person';
+import styled from 'styled-components';
+
+const StyledButton = styled.button`
+  background-color: ${props => props.alt ? '#484c60' : '#282c40'};
+	padding: 8px 16px;
+	border: 1px solid ${props => props.alt ? 'tomato' : 'white'};
+	borderRadius: 4px;
+	color: ${props => props.alt ? 'tomato' : 'white' };
+	font: inherit;
+	outline: none;
+	cursor: pointer;
+	&:hover {
+		background-color: #484c60;
+	}
+`;
 
 class App extends Component {
   state = {
@@ -37,19 +51,6 @@ class App extends Component {
   }
 
   render() {
-    const btnStyle = {
-      backgroundColor: '#282c40',
-      padding: '8px 16px',
-      border: '1px solid white',
-      borderRadius: '4px',
-      color: 'white',
-      font: 'inherit',
-      outline: 'none',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: '#484c60',
-      }
-    }
 
     let persons = null;
     if (this.state.showPersons) {
@@ -64,11 +65,6 @@ class App extends Component {
           })}
         </div>
       );
-      btnStyle.color = 'red';
-      btnStyle[':hover'] = {
-        backgroundColor: '#484c60',
-        color: 'tomato',
-      }
     }
 
     const stateClass = [];
@@ -80,16 +76,14 @@ class App extends Component {
     }
 
     return (
-      <StyleRoot>
-        <div className="App">
-          <h1>Hi, I'm a React App</h1>
-          <p className={stateClass.join(' ')}>This is really working</p>
-          <button onClick={this.togglePersonsHandler} style={btnStyle}>Toggle Persons</button>
-          {persons}
-        </div>
-      </StyleRoot>
+      <div className="App">
+        <h1>Hi, I'm a React App</h1>
+        <p className={stateClass.join(' ')}>This is really working</p>
+        <StyledButton alt={this.state.showPersons} onClick={this.togglePersonsHandler}>Toggle Persons</StyledButton>
+        {persons}
+      </div>
     );
   }
 }
 
-export default Radium(App);
+export default App;
